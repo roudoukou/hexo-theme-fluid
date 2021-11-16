@@ -20,8 +20,8 @@ home:
   title: 首頁
 
 archive:
-  title: 封存
-  subtitle: 封存
+  title: 文章
+  subtitle: 所有文章
 
 tag:
   title: 標籤
@@ -33,7 +33,7 @@ category:
 
 about:
   title: 關於
-  subtitle: 關於
+  subtitle: 關於我
 
 page404:
   title: 頁面走丟啦～

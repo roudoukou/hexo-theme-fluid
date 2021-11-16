@@ -1,13 +1,11 @@
-/* global Fluid, CONFIG, jQuery */
+/* global Fluid, CONFIG */
 
 HTMLElement.prototype.wrap = function(wrapper) {
   this.parentNode.insertBefore(wrapper, this);
   this.parentNode.removeChild(this);
   wrapper.appendChild(this);
 };
-
 Fluid.plugins = {
-
   typing: function(text) {
     if (!('Typed' in window)) { return; }
 
@@ -36,8 +34,7 @@ Fluid.plugins = {
     if (toc.length === 0 || !window.tocbot) { return; }
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init({
+	window.tocbot.init({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
       headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
@@ -54,11 +51,14 @@ Fluid.plugins = {
       toc.css('visibility', 'visible');
     }
   },
+  delTocBot: function() {
+    window.tocbot.destroy();
+  },
 
-  initFancyBox: function(selector) {
-    if (!('fancybox' in jQuery)) { return; }
+  initFancyBox: function() {
+    if (!$.fancybox) { return; }
 
-    jQuery(selector || '.markdown-body :not(a) > img, .markdown-body > img').each(function() {
+    jQuery('.markdown-body :not(a) > img, .markdown-body > img').each(function() {
       var $image = jQuery(this);
       var imageUrl = $image.attr('data-src') || $image.attr('src') || '';
       if (CONFIG.image_zoom.img_url_replace) {
@@ -92,7 +92,7 @@ Fluid.plugins = {
       }
     });
 
-    jQuery.fancybox.defaults.hash = false;
+    $.fancybox.defaults.hash = false;
     jQuery('.fancybox').fancybox({
       loop   : true,
       helpers: {
