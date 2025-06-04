@@ -14,14 +14,19 @@
   .nav-item .nav-link
     display block
     color var(--navbar-text-color)
-    transition color .2s, background-color .2s
+    transition color .2s ease-in-out, background-color .2s ease-in-out
 
     &:hover
       color var(--link-hover-color)
-      background-color rgba(0, 0, 0, 0.1)
+
+    &:focus
+      color var(--navbar-text-color)
 
     i
       font-size 0.875rem
+
+    i:only-child
+      margin 0 .2rem
 
   .navbar-toggler
     border-width 0

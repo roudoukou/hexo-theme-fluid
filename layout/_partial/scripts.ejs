@@ -84,8 +84,18 @@ $.getScript("https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js");
 $(document).on('pjax:send',function(){
   //destroy()方法
   if ($('.toc').length) Fluid.plugins.delTocBot(); 
+  if ($('.modal-backdrop').length) Fluid.events.registerResetModal();
 })
+// $(document).on('pjax:popstate', function() {
+//   debugger
+//   Fluid.events.registerResetModal();  // 调用模态框的重置和重新注册方法
+// });
+$(document).on('pjax:end', function() {
+  debugger
+  Fluid.events.registerResetModal();  // 调用模态框的重置和重新注册方法
+});
 $(document).on('pjax:complete', function() {
+  debugger
 	$("script[data-pjax], .pjax-reload script").each(function () {
 	  $(this).parent().append($(this).remove()); //所有符合標籤物件重載(目前:0)
 	});
@@ -94,6 +104,7 @@ $(document).on('pjax:complete', function() {
 	Fluid.plugins.initCopyCode(); //highlight copy功能重載
 	Fluid.events.registerNavbarEvent(); //導覽頁css重載
 	Fluid.events.registerScrollTopArrowEvent(); //往上按鈕重載
+	Fluid.events.registerResetModal();  // 调用模态框的重置和重新注册方法
 	Fluid.events.registerScrollDownArrowEvent(); //往下
     $.getScript("/js/img-lazyload.js"); //懶加載
     $.getScript("/js/color-schema.js"); //切換主題黑白
